@@ -1,6 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std;
+// brute force
 long maximumSumSubarray(int K, vector<int> &Arr, int N)
+{
+
+    long maxi = LONG_MIN;
+    for (int i = 0; i <= N - K; i++)
+    {
+        long sum = 0;
+        for (int j = i; j < i + K; j++)
+        {
+            sum = sum + Arr[j];
+        }
+
+        maxi = max(maxi, sum);
+    }
+
+    return maxi;
+}
+
+// sliding window
+/*long maximumSumSubarray(int K, vector<int> &Arr, int N)
 {
     int i = 0, j = 0;
     long sum = 0;
@@ -21,7 +41,7 @@ long maximumSumSubarray(int K, vector<int> &Arr, int N)
         }
     }
     return maxi;
-}
+}*/
 int main()
 {
     vector<int> Arr = {100, 200, 300, 400};
