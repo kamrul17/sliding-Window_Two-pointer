@@ -1,7 +1,51 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+bool areAnagrams(const string &str1, const string &str2)
+{
+    unordered_map<char, int> count;
+
+    for (char c : str1)
+    {
+        count[c]++;
+    }
+
+    for (char c : str2)
+    {
+        count[c]--;
+    }
+
+    for (const auto &pair : count)
+    {
+        if (pair.second != 0)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
 int search(int k, string pat, int n, string txt)
+{
+    for (int i = 0; i <= n - k; i++)
+    {
+        int patLength = pat.length();
+        int txtLength = txt.length();
+        int count = 0;
+
+        for (int i = 0; i <= txtLength - patLength; ++i)
+        {
+            string window = txt.substr(i, patLength);
+            if (areAnagrams(pat, window))
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+}
+/*int search(int k, string pat, int n, string txt)
 {
     int i = 0, j = 0;
     unordered_map<char, int> mpp;
@@ -51,7 +95,7 @@ int search(int k, string pat, int n, string txt)
         }
     }
     return ans;
-}
+}*/
 
 int main()
 {
