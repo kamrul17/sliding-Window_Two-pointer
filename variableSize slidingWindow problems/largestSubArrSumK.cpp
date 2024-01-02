@@ -43,8 +43,8 @@ int getLongestSubarray(vector<int> &a, int k)
 
 int main()
 {
-    vector<int> a = {-1, 1, 1};
-    int k = 1;
+    vector<int> a = {1, 1, 1, 1, 1, 1};
+    int k = 2;
     int len = getLongestSubarray(a, k);
     cout << "The length of the longest subarray is: " << len << "\n";
     return 0;
