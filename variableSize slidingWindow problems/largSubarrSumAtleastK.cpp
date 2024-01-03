@@ -2,7 +2,6 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-
 long long int maxSumWithK(long long int a[], long long int n, long long int k)
 {
     long long int j = 0;
