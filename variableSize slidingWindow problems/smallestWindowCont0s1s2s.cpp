@@ -1,3 +1,4 @@
+/*Given a string S consisting of the characters 0, 1 and 2. Your task is to find the length of the smallest substring of string S that contains all the three characters 0, 1 and 2. If no such substring exists, then return -1.*/
 #include <bits/stdc++.h>
 #include <climits>
 using namespace std;
