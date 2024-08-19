@@ -1,51 +1,75 @@
-
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 /*
-int longestSubArrayWithSumLessThan14(int arr[], int n)
+int longestSubstrWithOutRepeatingChar(string str, int size)
 {
-    int maxLength = 0;
-    for (int i = 0; i < n; i++)
+    int maxlen = INT_MIN;
+    for (int i = 0; i < size; i++)
     {
-        int sum = 0;
-        for (int j = i; j < n; j++)
+        int hash[255] = {0};
+        for (int j = i; j < size; j++)
         {
-            sum += arr[j];
-            if (sum < 14)
+            if (hash[str[j]] == 1)
             {
-                maxLength = max(maxLength, j - i + 1);
+                break;
+            }
+            else
+            {
+                maxlen = max(maxlen, j - i + 1);
+                hash[str[j]] = 1;
             }
         }
     }
-    return maxLength;
+    return maxlen;
 }
-*/
-
-int longestSubArrayWithSumLessThan14(int arr[], int n)
+int longestSubstrWithOutRepeatingChar(string str, int size)
 {
-    int maxLength = 0;
-    int s = 0;
-    int sum = 0;
-
-    for (int e = 0; e < n; e++)
+    int maxlen = INT_MIN;
+    unordered_set<int> set;
+    int l = 0, r = 0;
+    while (r < size)
     {
-        sum += arr[e];
-        while (sum > 14)
+        if (set.find(str[r]) != set.end())
         {
-            sum -= arr[s];
-            s++;
+            while (l < r && set.find(str[r]) != set.end())
+            {
+                set.erase(str[l]);
+                l++;
+            }
         }
-        maxLength = max(maxLength, e - s + 1);
+        set.insert(str[r]);
+        maxlen = max(maxlen, r - l + 1);
+        r++;
     }
-    return maxLength;
-}
 
+    return maxlen;
+}*/
+int longestSubstrWithOutRepeatingChar(string str, int size)
+{
+    int maxlen = INT_MIN;
+    vector<int> hash(256, -1);
+    int l = 0, r = 0;
+    while (r < size)
+    {
+        if (hash[str[r]] != -1)
+        {
+            if (hash[str[r]] >= l)
+            {
+                l = hash[str[r]] + 1;
+            }
+        }
+        hash[str[r]] = r;
+        maxlen = max(maxlen, r - l + 1);
+        r++;
+    }
+
+    return maxlen;
+}
 int main()
 {
-    int arr[] = {2, 3, 4, 3, 6, 4};
-    int size = sizeof(arr) / sizeof(int);
-
-    int ans = longestSubArrayWithSumLessThan14(arr, size);
-    cout << ans;
+    string str = "abcasdsgsa";
+    int size = str.size();
+    int len = longestSubstrWithOutRepeatingChar(str, size);
+    cout << len;
     return 0;
 }
